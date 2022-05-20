@@ -1,19 +1,23 @@
 import { useState } from 'react';
 import { getMonsters } from './services/fetch-utils';
 import PokemonList from './PokemonList';
+import LoadingSpinner from './LoadingSpinner';
 
 export default function PokemonSearch() {
       // you'll need to track your pokemon search results, the loading state, and one form field: name. For this form field, set a real initial values (like 'pikachu') so the form populates with a default value.
   const [monsters, setMonsters] = useState([]);
   const [search, setSearch] = useState('pika');
+  const [loading, setLoading] = useState(false);
 
   async function handlePokemonSubmit(e) {
     e.preventDefault();
       
         // set the loading state to true
+    setLoading(true);
         // use fetch to make a request to your netlify pokemon function. Be sure to pass the pokemon name as a query param in the URL
     const data = await getMonsters(search);
         // put the jsonified data in state and set the loading state to false
+    setLoading(false);
     setMonsters(data);
   }
       
@@ -27,7 +31,8 @@ export default function PokemonSearch() {
         <button>Get pokemon</button>
       </form>
       {/* Make a PokemonList component to import and use here. Use a ternery to display a loading spinner (make a <Spinner /> component for this) if the data is still loading. */}
-      <PokemonList monsters={monsters}/> 
+      {loading ? <LoadingSpinner /> : <PokemonList monsters={monsters}/> }
+      
     </section>
   );
 
