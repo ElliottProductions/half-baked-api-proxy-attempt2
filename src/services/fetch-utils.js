@@ -13,6 +13,6 @@ export async function getResults(searchFilter) {
   const data = await rawResponse.json();
   console.log(data);
   
-  return data.data.results;
+  return data.data.businesses;
 }
   

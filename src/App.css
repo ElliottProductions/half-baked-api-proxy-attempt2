@@ -79,3 +79,18 @@ label {
 .pokemans {
   background-color: antiquewhite;
 }
+
+.yelp-item img {
+  height: 150px;
+  width: 200px;
+  border-radius: 15px;
+
+}
+
+.yelp-item {
+  background-color: antiquewhite;
+
+  margin-top: 20px;
+  padding: 5px;
+
+}

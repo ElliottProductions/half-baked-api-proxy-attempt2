@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import LoadingSpinner from './LoadingSpinner';
 import { getResults } from './services/fetch-utils';
 import YelpList from './YelpList';
 
@@ -17,7 +18,7 @@ export default function YelpSearch() {
     const data = await getResults(search);
     // put the jsonified data in state and set the loading state to false
     setLoading(false);
-    setSearch(data);
+    setResults(data);
   }
   
   return (
@@ -29,7 +30,7 @@ export default function YelpSearch() {
         <input value={search} onChange={ e => setSearch(e.target.value)}></input>
         <button>Search yelp</button>
       </form>
-      <YelpList />
+      { loading ? <LoadingSpinner /> : <YelpList results={results}/> }
       {/* Make a BusinessesList component to import and use here. Use a ternery to display a loading spinner (make a <Spinner /> component for this) if the data is still loading. */}
     </section>
   );
